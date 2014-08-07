@@ -40,4 +40,15 @@ bkm list
 ### Remove a bookmark
 
 Remove the the **my_github** bookmark
-`
+
+```
+bkm remove my_github
+```
+
+### Change a bookmark
+
+Change the **my_github** bookmark to **https://www.github.com/wkjagt**
+
+```
+bkm change my_github https://www.github.com/wkjagt
+```
