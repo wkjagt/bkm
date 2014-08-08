@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-import click, webbrowser, ConfigParser
-from os.path import expanduser
+import click, webbrowser, ConfigParser, os
 
-CONFIG_DIR = '{0}/.bkm'.format(expanduser("~"))
-CONFIG_FILE = '{0}/bkm'.format(CONFIG_DIR)
+CONFIG_DIR = os.path.join(os.path.expanduser("~"), '.bkm')
+CONFIG_FILE = os.path.join(CONFIG_DIR, 'bkm')
 
 @click.group()
 @click.pass_context
