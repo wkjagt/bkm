@@ -2,16 +2,17 @@
 import click, webbrowser, ConfigParser
 from os.path import expanduser
 
-CONFIG_DIR = '{0}/.bookmarks'.format(expanduser("~"))
-CONFIG_FILE = '{0}/bookmarks'.format(CONFIG_DIR)
+CONFIG_DIR = '{0}/.bkm'.format(expanduser("~"))
+CONFIG_FILE = '{0}/bkm'.format(CONFIG_DIR)
 
 @click.group()
 @click.pass_context
-@click.option('--config_file', type=click.File('wb'), default=CONFIG_FILE)
+@click.option('--config_file', type=click.File('w+'), default=CONFIG_FILE)
 def cli(ctx, config_file):
     ctx.obj['config'] = ConfigParser.ConfigParser()
     ctx.obj['config'].read(CONFIG_FILE)
     ctx.obj['config_file'] = config_file
+    __bookmarks_section_exists(ctx)
 
 @cli.command()
 @click.pass_context
@@ -59,7 +60,6 @@ def remove(ctx, bookmark):
     __delete_bookmark(ctx, bookmark)
     __success('Bookmark "{0}" deleted')
 
-
 def __save_bookmark(ctx, bookmark, url):
     ctx.obj['config'].set('bookmarks', bookmark, url)
     __write_config_file(ctx)
@@ -103,6 +103,13 @@ def __open_bookmark(ctx, bookmark):
         webbrowser.open(url, new=2)
     except ConfigParser.NoOptionError:
         __error('No bookmark named "{0}"'.format(bookmark))
+
+def __bookmarks_section_exists(ctx):
+    if not ctx.obj['config'].has_section('bookmarks'):
+        __add_section(ctx, 'bookmarks')
+
+def __add_section(ctx, section):
+    ctx.obj['config'].add_section(section)
 
 def __error(msg):
     click.echo(click.style(msg, bg='red', fg='white'))
