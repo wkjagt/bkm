@@ -63,6 +63,15 @@ Change the **my_github** bookmark to **https://www.github.com/wkjagt**
 bkm change my_github https://www.github.com/wkjagt
 ```
 
+### Select from list
+
+Without any arguments, `bkm` gives you the list of bookmarks. Select which one to open.
+
+```
+bkm
+```
+
+
 ## TODO
 - Support autocomplete with [argcomplete](https://pypi.python.org/pypi/argcomplete)
 - Run `bkm` without command, and select bookmark with arrow keys
