@@ -77,3 +77,4 @@ bkm
 - Run `bkm` without command, and select bookmark with arrow keys
 - Search
 - Have a config for which browser to use
+- Be able to type `bkm my_github` instead of `bkm open my_github`
