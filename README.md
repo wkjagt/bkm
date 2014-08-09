@@ -1,12 +1,17 @@
-bkm
-===
+# BKM : Browser bookmarks from the command line
 
-Browser bookmarks from the command line
+
+BKM is a small project of the "scratching my own itch type". I spend a lot of time in my terminal. Every time I needed to open a page in my  browser, I felt like I needed to be able to do this from the command line. Now I can.
 
 ## Installation
 
-1. Clone the gitrepo
-2. `pip install .`
+```
+git clone git@github.com:wkjagt/bkm.git
+cd bkm
+pip install .
+```
+
+If you don't have pip installed, [here's](http://pip.readthedocs.org/en/latest/installing.html) the instructions.
 
 ## Usage
 
