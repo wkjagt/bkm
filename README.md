@@ -1,5 +1,4 @@
-# BKM : Browser bookmarks from the command line
-
+# BKM : Command line bookmark manager
 
 BKM is a small project of the "scratching my own itch type". I spend a lot of time in my terminal. Every time I needed to open a page in my  browser, I felt like I needed to be able to do this from the command line. Now I can.
 
@@ -68,3 +67,4 @@ bkm change my_github https://www.github.com/wkjagt
 - Support autocomplete with [argcomplete](https://pypi.python.org/pypi/argcomplete)
 - Run `bkm` without command, and select bookmark with arrow keys
 - Search
+- Have a config for which browser to use
