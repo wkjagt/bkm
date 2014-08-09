@@ -3,7 +3,7 @@ import click, webbrowser, ConfigParser, os
 
 CONFIG_FILE = os.path.join(os.path.expanduser("~"), '.bkm')
 
-@click.group()
+@click.group(invoke_without_command=True)
 @click.pass_context
 @click.option('--config_file', type=click.File('w+'), default=CONFIG_FILE)
 def cli(ctx, config_file):
@@ -15,6 +15,9 @@ def cli(ctx, config_file):
     ctx.obj['config'].read(CONFIG_FILE)
 
     __bookmarks_section_exists(ctx)
+
+    if ctx.invoked_subcommand is None:
+        __select_from_list(ctx)
 
 @cli.command()
 @click.pass_context
@@ -87,14 +90,12 @@ def __show_bookmark(ctx, bookmark):
 
 def __list_bookmarks(ctx):
     rows = []
-    for bookmark in ctx.obj['config'].options('bookmarks'):
-        rows.append([bookmark, ctx.obj['config'].get('bookmarks', bookmark)])
+    for i, bookmark in enumerate(ctx.obj['config'].options('bookmarks')):
+        rows.append([str(i+1), bookmark, ctx.obj['config'].get('bookmarks', bookmark)])
 
     widths = [max(map(len, col)) for col in zip(*rows)]
     for row in rows:
-        __info(" : ".join((val.ljust(width) for val, width in zip(row, widths))))
-    __info('')
-    __info('{} bookmarks'.format(len(rows)))
+        __info("  ".join((val.ljust(width) for val, width in zip(row, widths))))
 
 def __get_bookmark_url(ctx, bookmark):
     return ctx.obj['config'].get('bookmarks', bookmark)
@@ -109,6 +110,15 @@ def __open_bookmark(ctx, bookmark):
 def __bookmarks_section_exists(ctx):
     if not ctx.obj['config'].has_section('bookmarks'):
         __add_section(ctx, 'bookmarks')
+
+def __select_from_list(ctx):
+    __list_bookmarks(ctx)
+    idx = click.prompt('Enter the number of the bookmark to open', type=int)
+    try:
+        bookmark = ctx.obj['config'].options('bookmarks')[idx-1]
+        __open_bookmark(ctx, bookmark)
+    except Exception, e:
+        __error('{0} is not a valid option'.format(idx))
 
 def __add_section(ctx, section):
     ctx.obj['config'].add_section(section)
