@@ -1,16 +1,19 @@
 #!/usr/bin/env python
 import click, webbrowser, ConfigParser, os
 
-CONFIG_DIR = os.path.join(os.path.expanduser("~"), '.bkm')
-CONFIG_FILE = os.path.join(CONFIG_DIR, 'bkm')
+CONFIG_FILE = os.path.join(os.path.expanduser("~"), '.bkm')
 
 @click.group()
 @click.pass_context
 @click.option('--config_file', type=click.File('w+'), default=CONFIG_FILE)
 def cli(ctx, config_file):
-    ctx.obj['config'] = ConfigParser.ConfigParser()
+
+    ctx.obj = {
+        'config' : ConfigParser.ConfigParser(),
+        'config_file' : config_file
+    }
     ctx.obj['config'].read(CONFIG_FILE)
-    ctx.obj['config_file'] = config_file
+
     __bookmarks_section_exists(ctx)
 
 @cli.command()
@@ -121,4 +124,4 @@ def __info(msg):
     click.echo(click.style(msg, fg='yellow'))
 
 if __name__ == '__main__':
-    cli(obj={})
+    cli()
