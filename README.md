@@ -3,6 +3,12 @@ bkm
 
 Browser bookmarks from the command line
 
+## Installation
+
+1. Clone the gitrepo
+2. `pip install .`
+
+## Usage
 
 ### Add a bookmark
 
