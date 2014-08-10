@@ -3,7 +3,7 @@ import click, webbrowser, ConfigParser, os
 
 CONFIG_FILE = os.path.join(os.path.expanduser("~"), '.bkm')
 
-@click.group(invoke_without_command=True)
+@click.group()
 @click.pass_context
 @click.option('--config_file', type=click.File('w+'), default=CONFIG_FILE)
 def cli(ctx, config_file):
@@ -16,15 +16,18 @@ def cli(ctx, config_file):
 
     __bookmarks_section_exists(ctx)
 
-    if ctx.invoked_subcommand is None:
-        __select_from_list(ctx)
-
 @cli.command()
 @click.pass_context
-@click.argument('bookmark', nargs=1)
-def open(ctx, bookmark):
-    __check_bookmark_exists(ctx, bookmark)
-    __open_bookmark(ctx, bookmark)
+@click.argument('bookmarks', nargs=-1)
+def open(ctx, bookmarks):
+
+    if len(bookmarks) > 0:
+        for bookmark in bookmarks:
+            __check_bookmark_exists(ctx, bookmark)
+        for bookmark in bookmarks:
+            __open_bookmark(ctx, bookmark)
+    else:
+        __select_from_list(ctx)
 
 @cli.command()
 @click.pass_context
