@@ -25,10 +25,22 @@ bkm add my_github https://github.com/wkjagt
 ### Open a bookmark
 
 
-Open the **my_github** bookmark in a browser
+Open the **my_github** bookmark in a browser.
 
 ```
 bkm open my_github
+```
+
+You can also open multiple bookmarks by providing multiple bookmark names
+
+```
+bkm open my_github google
+```
+
+If you don't provide any book mark name, you'll get a list of all your bookmarks from which you can select.
+
+```
+bkm
 ```
 
 ### Show a bookmark
@@ -63,13 +75,6 @@ Change the **my_github** bookmark to **https://www.github.com/wkjagt**
 bkm change my_github https://www.github.com/wkjagt
 ```
 
-### Select from list
-
-Without any arguments, `bkm` gives you the list of bookmarks. Select which one to open.
-
-```
-bkm
-```
 
 
 ## TODO
