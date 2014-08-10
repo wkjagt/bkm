@@ -2,6 +2,8 @@
 
 BKM is a small project of the "scratching my own itch type". I spend a lot of time in my terminal. Every time I needed to open a page in my  browser, I felt like I needed to be able to do this from the command line by typing a bookmark name. Now I can.
 
+**Tip** : The bookmarks are stored in a file `.bkm` in your home folder. If you put this file in your DropBox folder and symlink to it, you'll have your bookmarks synced on all your computers. Another advantage of this is that your bookmarks will be versioned by DropBox so you can go restore bookmarks if you accidentally remove them.
+
 ## Installation
 
 ```
