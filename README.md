@@ -37,7 +37,7 @@ You can also open multiple bookmarks by providing multiple bookmark names
 bkm open my_github google
 ```
 
-If you don't provide any book mark name, you'll get a list of all your bookmarks from which you can select.
+If you don't provide any bookmark name, you'll get a list of all your bookmarks from which you can select.
 
 ```
 bkm
